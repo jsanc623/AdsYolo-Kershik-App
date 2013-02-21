@@ -10,6 +10,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -40,11 +43,20 @@ public class MainActivity extends ListActivity {
     	setContentView(R.layout.activity_main);
     	
     	Toast.makeText(getApplicationContext(), "Loading your settings.", Toast.LENGTH_SHORT).show();
-    	new RequestTask().execute(MainActivity.sURL);
+    	String JSONList = new RequestTask().execute(MainActivity.sURL).toString();
     	
-    	LV = (ListView)findViewById(android.R.id.list);
-        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, PENS));
-        getListView().setTextFilterEnabled(true);
+    	try {
+			JSONObject JSON = new JSONObject(JSONList);
+	    	JSONArray propertiesArray = JSON.names();
+	        JSONArray valuesArray = JSON.toJSONArray(propertiesArray);
+	    	
+	    	LV = (ListView)findViewById(android.R.id.list);
+	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, valuesArray.getString(this)));
+	        getListView().setTextFilterEnabled(true);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @Override

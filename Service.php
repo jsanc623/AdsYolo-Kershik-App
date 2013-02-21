@@ -1,6 +1,6 @@
 <?php
 
-$sample_properties = array(
+$sample_properties = array( "Properties" => 
                          array(
                             "Name" => "Google",
                             "Image" => "http://git.juanleonardosanchez.com/AdClick-Prototype/web-assets/1.jpg", 
