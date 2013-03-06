@@ -1,5 +1,5 @@
-AdClick-Prototype
-=================
+AdsYolo-Kershik
+===============
 
 A simple fetch &amp; clickable display ad app prototype.
 
