@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kershik βeta</string>
+    <string name="action_settings">Settings</string>
+    <string name="mainactivity_hello">Welcome to Kershik Beta!</string>
+    
+    <!-- activity_login -->
+	<string name="username">Username</string>
+	<string name="password">Password</string>
+	<string name="login_button">Log In</string>
+	
+	<!-- activity_signup -->
+	<string name="signuptoptext">To create an account, please enter the following:</string>
+	<string name="signupemail">Email</string>
+	<string name="signupphone">Phone Number</string>
+	<string name="signuplocation">Province</string>
+	<string name="signup_button">Sign Up</string>
+	
+	<!-- activity_offers -->
+	
+	<!-- activity_complete -->
+	
+</resources>

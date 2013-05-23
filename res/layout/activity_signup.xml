@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SignupActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="@string/signuptoptext" />
+
+   <Button
+       android:id="@+id/button1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginBottom="62dp"
+       android:text="@string/signup_button" />
+
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/textView1"
+       android:layout_below="@+id/textView1"
+       android:layout_marginTop="26dp"
+       android:text="@string/signupemail" />
+
+   <EditText
+       android:id="@+id/signupemail_input"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/textView2"
+       android:layout_centerHorizontal="true"
+       android:ems="10"
+       android:inputType="text" >
+
+       <requestFocus />
+   </EditText>
+
+   <TextView
+       android:id="@+id/textView3"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/textView2"
+       android:layout_below="@+id/signupemail_input"
+       android:layout_marginTop="20dp"
+       android:text="@string/signupphone" />
+
+   <EditText
+       android:id="@+id/signupphone_input"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/signupemail_input"
+       android:layout_below="@+id/textView3"
+       android:ems="10"
+       android:inputType="text" />
+
+   <TextView
+       android:id="@+id/textView4"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/textView2"
+       android:layout_below="@+id/signupphone_input"
+       android:layout_marginTop="20dp"
+       android:text="@string/signuplocation" />
+
+   <EditText
+       android:id="@+id/signuplocation_input"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/signupphone_input"
+       android:layout_below="@+id/textView4"
+       android:ems="10"
+       android:inputType="text" />
+   
+</RelativeLayout> 
