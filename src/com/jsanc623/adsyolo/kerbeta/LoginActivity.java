@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import com.appglu.Row;
 import com.appglu.android.AppGlu;
 import com.appglu.android.AppGluSettings;
 
@@ -22,7 +23,6 @@ import android.widget.EditText;
 import android.app.Activity;
 import android.content.Intent;
 
-@SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 	Button loginButton;
 	EditText uname_tmp;
@@ -60,43 +60,45 @@ public class LoginActivity extends Activity {
 					username = uname_tmp.getText().toString();
 					password = passw_tmp.getText().toString();
 
-					Log.d("itsokall", "in switch, doing comparison.");
 					Log.d("itsokall", username);
 					Log.d("itsokall", password);
-					
-					if(username.equals("jsanc623") && password.equals("lonewolf89")){
 
-						Log.d("itsokall", "in comparison, good match");
-						Intent myIntent = new Intent(LoginActivity.this, OffersActivity.class);
-						LoginActivity.this.startActivity(myIntent);
-					} else {
-
-						Log.d("itsokall", "in comparison, bad match");
-						Intent myIntent = new Intent(LoginActivity.this, SignupActivity.class);
-						LoginActivity.this.startActivity(myIntent);
-					}
+					Log.d("itsokall", "in switch,  building urlParameters");
 					
-
-					Log.d("itsokall", "in switch, post comparison");
-					
-					/*String urlParameters = null;
+					String urlParameters = null;
 					try {
-						urlParameters = "username=" + URLEncoder.encode(username.toString(), "UTF-8") +
-						                "&password=" + URLEncoder.encode(password.toString(), "UTF-8");
+						urlParameters = "username=" + URLEncoder.encode(username, "UTF-8") +
+						                "&password=" + URLEncoder.encode(password, "UTF-8");
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
+
+					Log.d("itsokall", "AppGlu CrudAPI");
+					
+					Row row = AppGlu.crudApi().read("userOffers", "1");
+					Log.d("itsokall", row.toString());
+					
+					Log.d("itsokall", "init Retriever Retriever = new Retriever. Then executePost.");
 					
 					Retriever Retriever = new Retriever();
 					String userLoggedIn = Retriever.executePost("http://pixls.me/adsyolo/login.php", urlParameters);
 					
-					if(userLoggedIn == "fail"){
-						Intent myIntent = new Intent(LoginActivity.this, SignupActivity.class);
-						LoginActivity.this.startActivity(myIntent);
+					Log.d("itsokall", "userLoggedIn" + userLoggedIn);
+					Log.d("itsokall", "entering userloggedin comparison");
+					if(userLoggedIn != null && !userLoggedIn.isEmpty()){
+						if(userLoggedIn.equals("fail")){
+							Log.d("itsokall", "in userloggedin comparaison, ok!");
+							Intent myIntent = new Intent(LoginActivity.this, SignupActivity.class);
+							LoginActivity.this.startActivity(myIntent);
+						} else {
+							Log.d("itsokall", "in userloggedin comparison, fail");
+							Intent myIntent = new Intent(LoginActivity.this, OffersActivity.class);
+							LoginActivity.this.startActivity(myIntent);
+						}
+						Log.d("itsokall", "post everything in switch onCreate()");
 					} else {
-						Intent myIntent = new Intent(LoginActivity.this, OffersActivity.class);
-						LoginActivity.this.startActivity(myIntent);
-					}*/
+						Log.d("itsokall", "empty!"); 
+					}
                  }
              }
 	    }
@@ -112,6 +114,8 @@ class Retriever extends AsyncTask<String, String, String> {
 	    URL url;
 	    HttpURLConnection connection = null;  
 	    try {
+	      Log.d("itsokall", "in executePost try-catch statement");
+	      
 	      //Create connection
 	      url = new URL(targetURL);
 	      connection = (HttpURLConnection)url.openConnection();
@@ -122,15 +126,23 @@ class Retriever extends AsyncTask<String, String, String> {
 	               Integer.toString(urlParameters.getBytes().length));
 	      connection.setRequestProperty("Content-Language", "en-US");  
 				
-	      connection.setUseCaches (false);
+	      connection.setUseCaches(false);
 	      connection.setDoInput(true);
 	      connection.setDoOutput(true);
+	      
 
+	      Log.d("itsokall", "engaging connection");
+	      
 	      //Send request
-	      DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());
+	      DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+	      
+	      Log.d("itsokall", "connection engaged, writing to output stream");
+	      
 	      wr.writeBytes (urlParameters);
 	      wr.flush ();
 	      wr.close ();
+	      
+	      Log.d("itsokall", "dataoutputstream closed, getting response");
 
 	      //Get Response	
 	      InputStream is = connection.getInputStream();
@@ -142,19 +154,21 @@ class Retriever extends AsyncTask<String, String, String> {
 	        response.append('\r');
 	      }
 	      rd.close();
+	      Log.d("itsokall", "returning response: " + response.toString());
+
+			Log.d("itsokall", "Disengaging connection");
+			connection.disconnect(); 
+			
 	      return response.toString();
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	      return null;
-	    } finally {
-	      if(connection != null) {
-	        connection.disconnect(); 
-	      }
 	    }
 	  }
 
     protected void onPostExecute() {
-        // TODO: check this.exception 
+    	Log.d("itsokall", "IN ONPOSTEXECUTE");
+        // TODO: check this.exception
         // TODO: do something with the feed
     }
 
