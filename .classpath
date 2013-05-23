@@ -10,6 +10,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs/jackson-core-asl-1.9.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs/jackson-mapper-asl-1.9.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs/spring-android-core-1.0.1.RELEASE.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs/spring-android-rest-template-1.0.1.RELEASE.jar" sourcepath="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/sources/appglu-android-sdk-1.0.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs/spring-android-rest-template-1.0.1.RELEASE.jar" sourcepath="C:/Users/juan.sanchez/Desktop/Android/work/appglu-android-sdk-1.0.0/libs"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
