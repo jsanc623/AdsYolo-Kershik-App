@@ -14,6 +14,7 @@ import com.appglu.android.AppGluSettings;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,35 +25,59 @@ import android.content.Intent;
 @SuppressWarnings("unused")
 public class LoginActivity extends Activity {
 	Button loginButton;
-	EditText username;
-	EditText password;
+	EditText uname_tmp;
+	EditText passw_tmp;
+	String username;
+	String password;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		Log.d("itsokall", "post setContentView");
   
 	    Button loginButton = (Button) findViewById(R.id.login_button);
 	    loginButton.setOnClickListener(onClickListener);
+	    
+		Log.d("itsokall", "post .setOnClickListener");
 		
 		AppGluSettings settings = new AppGluSettings("fS3jywqBB3Iy27P", "LUbdT5GHTDmn14JYvUtzksFMttGJCU", "staging");
 		AppGlu.initialize(this, settings);
+		 
+		Log.d("itsokall", "post AppGlu init");
 	}
 	
 	public OnClickListener onClickListener = new OnClickListener() {
 	    public void onClick(final View v) {
+			 Log.d("itsokall", "in onClick pre switch");
              switch(v.getId()){
                  case R.id.login_button: {
-					username = (EditText)findViewById(R.id.username);
-					password = (EditText)findViewById(R.id.password);
+             		Log.d("itsokall", "in switch, getting username and password");
+					uname_tmp = (EditText)findViewById(R.id.username);
+					passw_tmp = (EditText)findViewById(R.id.password);
 					
-					if(username.toString() == "jsanc623" && password.toString() == "lonewolf89"){
+					username = uname_tmp.getText().toString();
+					password = passw_tmp.getText().toString();
+
+					Log.d("itsokall", "in switch, doing comparison.");
+					Log.d("itsokall", username);
+					Log.d("itsokall", password);
+					
+					if(username.equals("jsanc623") && password.equals("lonewolf89")){
+
+						Log.d("itsokall", "in comparison, good match");
 						Intent myIntent = new Intent(LoginActivity.this, OffersActivity.class);
 						LoginActivity.this.startActivity(myIntent);
 					} else {
+
+						Log.d("itsokall", "in comparison, bad match");
 						Intent myIntent = new Intent(LoginActivity.this, SignupActivity.class);
 						LoginActivity.this.startActivity(myIntent);
 					}
+					
+
+					Log.d("itsokall", "in switch, post comparison");
 					
 					/*String urlParameters = null;
 					try {
@@ -82,6 +107,8 @@ public class LoginActivity extends Activity {
 class Retriever extends AsyncTask<String, String, String> {
 
 	public String executePost(String targetURL, String urlParameters){
+
+		Log.d("itsokall", "in executePost" + targetURL);
 	    URL url;
 	    HttpURLConnection connection = null;  
 	    try {
