@@ -8,8 +8,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
+import com.appglu.AsyncCallback;
 import com.appglu.Row;
+import com.appglu.Rows;
 import com.appglu.android.AppGlu;
 import com.appglu.android.AppGluSettings;
 
@@ -73,10 +76,21 @@ public class LoginActivity extends Activity {
 						e.printStackTrace();
 					}
 
-					Log.d("itsokall", "AppGlu CrudAPI");
+					Log.d("itsokall", "AppGlu CrudAPI"); 
 					
-					Row row = AppGlu.crudApi().read("userOffers", "1");
-					Log.d("itsokall", row.toString());
+					Rows result = AppGlu.crudApi().readAll("Offers");
+					Integer totalRows = result.getTotalRows();
+					List<Row> rows = result.getRows();
+					
+					// error here
+					AppGlu.crudApi().read("Offers", "1");
+					
+					AppGlu.crudApi().readInBackground("Offers", "1", new AsyncCallback<Row>() {
+						public void onResult(Row row) {
+						  Log.d("itsokall", "in onResult!");
+						  Log.d("itsokall", row.toString());
+						}
+					});
 					
 					Log.d("itsokall", "init Retriever Retriever = new Retriever. Then executePost.");
 					
