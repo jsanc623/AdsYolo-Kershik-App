@@ -2,13 +2,24 @@ package com.jsanc623.adsyolo.kerbeta;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.appglu.AsyncCallback;
 import com.appglu.Row;
@@ -76,7 +87,7 @@ public class LoginActivity extends Activity {
 						e.printStackTrace();
 					}
 
-					Log.d("itsokall", "AppGlu CrudAPI"); 
+					/*Log.d("itsokall", "AppGlu CrudAPI"); 
 					
 					Rows result = AppGlu.crudApi().readAll("Offers");
 					Integer totalRows = result.getTotalRows();
@@ -90,12 +101,12 @@ public class LoginActivity extends Activity {
 						  Log.d("itsokall", "in onResult!");
 						  Log.d("itsokall", row.toString());
 						}
-					});
+					});*/
 					
 					Log.d("itsokall", "init Retriever Retriever = new Retriever. Then executePost.");
 					
 					Retriever Retriever = new Retriever();
-					String userLoggedIn = Retriever.executePost("http://pixls.me/adsyolo/login.php", urlParameters);
+					String userLoggedIn = Retriever.executePost("http://pixls.me/adsyolo/login.php", username, password);
 					
 					Log.d("itsokall", "userLoggedIn" + userLoggedIn);
 					Log.d("itsokall", "entering userloggedin comparison");
@@ -121,11 +132,40 @@ public class LoginActivity extends Activity {
 
 
 class Retriever extends AsyncTask<String, String, String> {
+	
+	HttpResponse response;
 
-	public String executePost(String targetURL, String urlParameters){
+	public String executePost(String targetURL, String username, String password){
 
-		Log.d("itsokall", "in executePost" + targetURL);
-	    URL url;
+		Log.d("itsokall", "in executePost " + targetURL);
+		
+		// Create a new HttpClient and Post Header
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(targetURL);
+
+		try {
+			Log.d("itsokall", "inTryBlock");
+		    // Add your data
+		    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		    nameValuePairs.add(new BasicNameValuePair("username", username));
+		    nameValuePairs.add(new BasicNameValuePair("password", password));
+		    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		    
+		    Log.d("itsokall", "executing!");
+		    
+		    // Execute HTTP Post Request
+		    response = httpclient.execute(httppost);
+
+		} catch (ClientProtocolException e) {
+		    // TODO Auto-generated catch block
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		}
+
+		return response.toString();
+		
+	    /*URL url;
 	    HttpURLConnection connection = null;  
 	    try {
 	      Log.d("itsokall", "in executePost try-catch statement");
@@ -177,7 +217,7 @@ class Retriever extends AsyncTask<String, String, String> {
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	      return null;
-	    }
+	    }*/
 	  }
 
     protected void onPostExecute() {
