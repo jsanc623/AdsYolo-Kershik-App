@@ -77,17 +77,6 @@ public class OffersActivity extends Activity {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 		    	i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.herocraft.game.icerage"));
 		    	startActivity(i);
-				
-							
-				/*protected void onListItemClick(ListView l, View v, int position, long id) {
-		    	super.onListItemClick(l, v, position, id);
-		    	Object o = this.getListAdapter().getItem(position);
-		    	String pen = o.toString();
-		    	Toast.makeText(this, "You have chosen the pen: " + " " + pen, Toast.LENGTH_LONG).show();
-
-		    	Intent i = new Intent(Intent.ACTION_VIEW);
-		    	i.setData(Uri.parse("thisismyurl.com"));
-		    	startActivity(i);*/
 			}
 		});		
 	}	
