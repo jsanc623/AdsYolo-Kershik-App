@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -35,7 +34,6 @@ public class OffersActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d("itsokall", "2: In OffersActivity onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_offers);
 
@@ -51,8 +49,6 @@ public class OffersActivity extends Activity {
 			e.printStackTrace();
 		} // getting XML from URL
 		Document doc = parser.getDomElement(xml); // getting DOM element
-
-		Log.d("itsokall", "2a: In OffersActivity onCreate; Post XMLParse");
 		
 		NodeList nl = doc.getElementsByTagName(KEY_SONG);
 		// looping through all song nodes <song>
@@ -70,22 +66,15 @@ public class OffersActivity extends Activity {
 			// adding HashList to ArrayList
 			songsList.add(map);
 		}
-		
-
-		Log.d("itsokall", "2b: In OffersActivity onCreate; Post HashNode");
-		
-
+	
 		list=(ListView)findViewById(R.id.list);
 		
 		// Getting adapter by passing xml data ArrayList
         adapter=new LazyAdapter(this, songsList);        
         list.setAdapter(adapter);
 
-		Log.d("itsokall", "2c: In OffersActivity onCreate; Post LazyAdapter");
-
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
