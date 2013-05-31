@@ -2,12 +2,14 @@ package com.jsanc623.adsyolo.kerbeta;
 
 import java.io.File;
 import android.content.Context;
+import android.util.Log;
  
 public class FileCache {
  
     private File cacheDir;
  
     public FileCache(Context context){
+		Log.d("itsokall", "z: In FileCache");
         //Find the dir to save cached images
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
             cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"LazyList");

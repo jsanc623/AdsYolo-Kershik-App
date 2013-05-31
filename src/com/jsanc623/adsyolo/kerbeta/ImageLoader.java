@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class ImageLoader {
@@ -29,6 +30,7 @@ public class ImageLoader {
     ExecutorService executorService; 
     
     public ImageLoader(Context context){
+		Log.d("itsokall", "z: In ImageLoader");
         fileCache=new FileCache(context);
         executorService=Executors.newFixedThreadPool(5);
     }

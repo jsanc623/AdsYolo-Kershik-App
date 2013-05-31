@@ -2,6 +2,7 @@ package com.jsanc623.adsyolo.kerbeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,15 +35,24 @@ public class OffersActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d("itsokall", "2: In OffersActivity onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_offers);
-		
 
 		ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
 
 		XMLParser parser = new XMLParser();
-		String xml = parser.getXmlFromUrl(URL); // getting XML from URL
+		String xml = null;
+		try {
+			xml = new getXmlFromUrl().execute(URL).get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		} // getting XML from URL
 		Document doc = parser.getDomElement(xml); // getting DOM element
+
+		Log.d("itsokall", "2a: In OffersActivity onCreate; Post XMLParse");
 		
 		NodeList nl = doc.getElementsByTagName(KEY_SONG);
 		// looping through all song nodes <song>
@@ -61,24 +72,27 @@ public class OffersActivity extends Activity {
 		}
 		
 
+		Log.d("itsokall", "2b: In OffersActivity onCreate; Post HashNode");
+		
+
 		list=(ListView)findViewById(R.id.list);
 		
 		// Getting adapter by passing xml data ArrayList
         adapter=new LazyAdapter(this, songsList);        
         list.setAdapter(adapter);
-        
+
+		Log.d("itsokall", "2c: In OffersActivity onCreate; Post LazyAdapter");
 
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 		    	i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.herocraft.game.icerage"));
 		    	startActivity(i);
 			}
-		});		
+		});
 	}	
 }
 	

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class LazyAdapter extends BaseAdapter {
     public ImageLoader imageLoader; 
     
     public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+		Log.d("itsokall", "z: In LazyAdapter");
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,6 +41,7 @@ public class LazyAdapter extends BaseAdapter {
     }
     
     public View getView(int position, View convertView, ViewGroup parent) {
+		Log.d("itsokall", "z: In LazyAdapter; getView");
         View vi=convertView;
         if(convertView==null)
             vi = inflater.inflate(R.layout.list_row, null);

@@ -17,9 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.appglu.android.AppGlu;
-import com.appglu.android.AppGluSettings;
-
 import android.util.Log;
 import android.widget.EditText;
 import android.content.Intent;
@@ -34,14 +31,15 @@ public class LoginActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("itsokall", "1: In LoginActivity onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
 	    Button loginButton = (Button) findViewById(R.id.login_button);
 	    loginButton.setOnClickListener(onClickListener);
 	    
-		AppGluSettings settings = new AppGluSettings("fS3jywqBB3Iy27P", "LUbdT5GHTDmn14JYvUtzksFMttGJCU", "staging");
-		AppGlu.initialize(this, settings);
+		//AppGluSettings settings = new AppGluSettings("fS3jywqBB3Iy27P", "LUbdT5GHTDmn14JYvUtzksFMttGJCU", "staging");
+		//AppGlu.initialize(this, settings);
 	}
 	
 	public OnClickListener onClickListener = new OnClickListener() {
@@ -68,14 +66,11 @@ public class LoginActivity extends Activity {
 						e.printStackTrace();
 					}
 					
-					Log.d("itsokall", userLoggedIn.toString());
-					
 					if(userLoggedIn != null && !userLoggedIn.toString().isEmpty()){
 						if(userLoggedIn.equals("fail")){
 							Intent myIntent = new Intent(LoginActivity.this, SignupActivity.class);
 							LoginActivity.this.startActivity(myIntent);
 						} else {
-							Log.d("itsokall", "in userloggedin comparison, ok");
 							Intent myIntent = new Intent(LoginActivity.this, OffersActivity.class);
 							LoginActivity.this.startActivity(myIntent);
 						}
@@ -130,9 +125,11 @@ public class LoginActivity extends Activity {
             return stream;
         }
  
-        @Override
+        /*@Override
         protected void onPostExecute(String output) {
-			outputText.setText(output);
-        }
+        	Log.d("itsokall", "output: " + output.toString());
+			//outputText.setText(output);
+			Log.d("itsokall", "outputText: " + outputText.toString());
+        }*/
 	}
 }
