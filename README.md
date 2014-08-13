@@ -1,3 +1,6 @@
+THIS PROJECT IS INACTIVE
+=======
+
 AdsYolo-Kershik
 ===============
 
